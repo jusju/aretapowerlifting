@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<link type="text/css" rel="stylesheet"
+	th:href="@{css/bootstrap.min.css}" />
+<title>Powerlifting results</title>
+</head>
+<body>
+
+<div class="container">
+
+	<div>
+		<h1> Powerlifting results</h1>
+	</div><br>
+
+	<h3 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]],
+		here are your powerlifting results!</h3>
+
+	<table class="table table-striped">
+		<tr>
+			<th>Lift</th>
+			<th>Kgs</th>
+			<th>RPE</th>
+			<th>date</th>
+			<th>reps</th>
+			<th></th>
+			<th></th>
+		</tr>
+		<tr th:each="result : ${results}">
+			<td th:text="${result.lift}"></td>
+			<td th:text="${result.kg}"></td>
+			<td th:text="${result.RPE}"></td>
+			<td th:text="${#temporals.format(result.date, 'dd.MM.yyyy')}"></td>
+			<td th:text="${result.reps}"></td>
+			<td><a th:href="@{/edit/{id}(id=${result.resultid})}">Edit</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')">
+			<a th:href="@{/delete/{id}(id=${result.resultid})}" class="btn btn-xs btn-danger">Delete</a></td>
+		</tr>
+	</table>
+	<a href="/add" class="btn btn-primary">Add a new result</a><br><br>
+	<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger" style="padding:10px 10"/>
+		</form>
+	</div>
+	
+
+	
+	<br>
+	
+</body>
+</html>

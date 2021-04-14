@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<title> Powerlifting results</title>
+</head>
+<body>
+
+<div class="container">
+<h1>Add a new lifting record</h1>
+<div class="col-md-4">
+ <form th:object="${result}" th:action="@{../save}" action="#" method="post">
+ 
+ <div>
+  <label for= "lift">Lift<input type="text" th:field= "*{lift}" class="form-control"></label>
+  </div>
+  <div>
+  <label for="kgs">KGs<input type="text" th:field= "*{kg}" class="form-control"></label>
+  </div>
+  <div>
+  <label for="RPE">RPE<input type="text" th:field= "*{RPE}" class="form-control"></label>
+  </div>
+  <div>
+  <label for="Reps">Reps<input type="text" th:field= "*{reps}" class="form-control"></label>
+  </div>
+  <div>
+  <label for="date">Date<input type="date" th:field= "*{date}" class="form-control"></label>
+  </div>
+ <input type="submit" value="Save"  class="btn btn-success"></input>
+ </form>
+</div>
+</div>
+
+
+</body>
+</html>
